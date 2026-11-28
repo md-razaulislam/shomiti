@@ -1,4 +1,24 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>একতাই আমাদের শক্তি</title><script>window.__dip=null;window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__dip=e;try{window.__instUI&&window.__instUI()}catch(x){}});window.addEventListener("appinstalled",function(){window.__dip=null;try{window.__instUI&&window.__instUI()}catch(x){}});window.__isApp=function(){try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(x){return false}};</script><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#0E6B58"><meta name="description" content="সমিতির জমা, কিস্তি, ঋণ ও খরচের হিসাব"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="একতা"><link rel="apple-touch-icon" href="icon-192.png"><link rel="icon" href="icon-192.png">
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>একতাই আমাদের শক্তি</title><script>window.EK_GCID='919807634870-5accgiupqv63cdrl77jort6jhaa63f0f.apps.googleusercontent.com';
+(function(){
+var KEY='AIzaSyA8JHr8xMX3zvANJwQEkpBT-b_CtqLTQ6o';
+function rnd(){var a=new Uint8Array(16);crypto.getRandomValues(a);return Array.prototype.map.call(a,function(x){return ('0'+x.toString(16)).slice(-2)}).join('')}
+window.__gcid=function(cb){var c=window.EK_GCID||'';try{c=c||localStorage.getItem('ek_gcid')||''}catch(e){}if(c)return cb(c);
+var done=0,t=setTimeout(function(){if(!done){done=1;cb('')}},4000);
+fetch('https://www.googleapis.com/identitytoolkit/v3/relyingparty/getProjectConfig?key='+KEY).then(function(r){return r.json()}).then(function(j){var x=((j&&j.idpConfig)||[]).filter(function(i){return i.provider==='GOOGLE'&&i.clientId})[0];var id=x?x.clientId:'';if(id){try{localStorage.setItem('ek_gcid',id)}catch(e){}}if(!done){done=1;clearTimeout(t);cb(id)}}).catch(function(){if(!done){done=1;clearTimeout(t);cb('')}})};
+window.__gRU=function(){return location.origin+location.pathname.replace(/index\.html$/,'')};
+window.__gGo=function(c){var n=rnd(),st=rnd();try{localStorage.setItem('ek_gnn',n);localStorage.setItem('ek_gst',st)}catch(e){}
+location.href='https://accounts.google.com/o/oauth2/v2/auth?client_id='+encodeURIComponent(c)+'&redirect_uri='+encodeURIComponent(window.__gRU())+'&response_type=id_token&scope='+encodeURIComponent('openid email profile')+'&nonce='+n+'&state='+st+'&prompt=select_account'};
+try{var h=location.hash||'';
+if(/[#&](id_token|error)=/.test(h)&&/state=/.test(h)){var q={};h.slice(1).split('&').forEach(function(x){var i=x.indexOf('=');if(i>0)q[x.slice(0,i)]=decodeURIComponent(x.slice(i+1).replace(/\+/g,' '))});
+var st=localStorage.getItem('ek_gst'),nn=localStorage.getItem('ek_gnn');localStorage.removeItem('ek_gst');localStorage.removeItem('ek_gnn');
+var ok=!!(q.state&&st&&q.state===st);
+if(ok&&q.id_token){try{var pl=JSON.parse(atob(q.id_token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));ok=pl.nonce===nn}catch(e){ok=false}
+if(ok){window.__gTok=q.id_token;window.__gPend=1}else window.__gErr='যাচাই মেলেনি'}
+else if(q.error)window.__gErr=q.error;else window.__gErr='যাচাই মেলেনি';
+history.replaceState(null,'',location.pathname+location.search+'#dash')}
+window.__gcid(function(){})}catch(e){}
+})();
+</script><script>window.__dip=null;window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();window.__dip=e;try{window.__instUI&&window.__instUI()}catch(x){}});window.addEventListener("appinstalled",function(){window.__dip=null;try{window.__instUI&&window.__instUI()}catch(x){}});window.__isApp=function(){try{return matchMedia("(display-mode: standalone)").matches||navigator.standalone===true}catch(x){return false}};</script><link rel="manifest" href="manifest.json"><meta name="theme-color" content="#0E6B58"><meta name="description" content="সমিতির জমা, কিস্তি, ঋণ ও খরচের হিসাব"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="একতা"><link rel="apple-touch-icon" href="icon-192.png"><link rel="icon" href="icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -582,7 +602,7 @@ if(a==='lang'){window.__langPick&&window.__langPick();return}
 if(a==='go'){note('');if(window.__goBusy)return;var p=new firebase.auth.GoogleAuthProvider();
 var mob=window.__isApp()||/android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent);
 function viaRedirect(){window.__goBusy=1;note('Google-এ নেওয়া হচ্ছে…',1);try{sessionStorage.setItem('ek_rd','1');localStorage.setItem('ek_pr',String(Date.now()))}catch(x){}auth.signInWithRedirect(p).catch(function(e){window.__goBusy=0;note(fe(e),0)})}
-if(mob){viaRedirect();return}
+if(mob){window.__goBusy=1;note('Google-এ নেওয়া হচ্ছে…',1);window.__gcid(function(c){if(c)window.__gGo(c);else{window.__goBusy=0;viaRedirect()}});return}
 window.__goBusy=1;auth.signInWithPopup(p).then(function(){window.__goBusy=0}).catch(function(e){window.__goBusy=0;if(e.code&&/popup-blocked|operation-not-supported|web-storage-unsupported/.test(e.code))viaRedirect();else note(fe(e),0)});return}
 if(a==='li'){var em=g('em').trim(),pw=g('pw');if(!em||!pw){note('মোবাইল নম্বর (বা ইমেইল) ও পাসওয়ার্ড দুটোই লিখুন',0);return}busy(1);auth.signInWithEmailAndPassword(lid(em),pw).catch(function(e){busy(0);note(fe(e),0)});return}
 if(a==='rs'){var em2=g('em').trim();if(!em2){note('আপনার ইমেইল লিখুন',0);return}if(/^\+?[\d\s-]{10,16}$/.test(em2)){note('মোবাইল নম্বর দিয়ে খোলা অ্যাকাউন্টের পাসওয়ার্ড রিসেট করতে Admin-এর সাথে যোগাযোগ করুন।',0);return}busy(1);auth.sendPasswordResetEmail(em2).then(function(){busy(0);note('রিসেট লিংক পাঠানো হয়েছে। ইমেইলের ইনবক্স ও স্প্যাম ফোল্ডার দেখুন।',1)}).catch(function(e){busy(0);note(fe(e),0)});return}
@@ -595,6 +615,8 @@ window.__regP.catch(function(e){window.__regP=null;busy(0);note(fe(e),0)})}});
 ov.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.tagName==='INPUT'){var b=ov.querySelector('.lg-b');if(b&&!b.disabled)b.click()}});
 draw();
 try{auth.getRedirectResult().then(function(r){var was=0;try{was=Date.now()-(+localStorage.getItem('ek_pr')||0)<300000;localStorage.removeItem('ek_pr');sessionStorage.removeItem('ek_rd')}catch(x){}if(was&&!(r&&r.user)){setTimeout(function(){if(!auth.currentUser){window.__goBusy=0;LG.v='in';draw();note('Google লগইন সম্পূর্ণ হয়নি (ফলাফল ফেরত আসেনি)। আবার চেষ্টা করুন। ডোমেইন: '+location.host,0);window.__prex&&window.__prex()}},2500)}}).catch(function(e){try{localStorage.removeItem('ek_pr');sessionStorage.removeItem('ek_rd')}catch(x){}window.__goBusy=0;LG.v='in';draw();ov.style.display='flex';window.__prex&&window.__prex();note(fe(e)+' ['+((e&&e.code)||'?')+']',0)})}catch(e){}
+if(window.__gTok){auth.signInWithCredential(firebase.auth.GoogleAuthProvider.credential(window.__gTok)).then(function(){window.__gPend=0}).catch(function(e){window.__gPend=0;window.__goBusy=0;LG.v='in';draw();ov.style.display='flex';window.__prex&&window.__prex();note(fe(e)+' ['+((e&&e.code)||'?')+']',0)})}
+else if(window.__gErr){setTimeout(function(){note('Google লগইন সম্পূর্ণ হয়নি ('+window.__gErr+')। আবার চেষ্টা করুন।',0)},50)}
 window.addEventListener('pageshow',function(e){if(e.persisted&&!auth.currentUser){window.__goBusy=0;try{note('')}catch(x){}}});setTimeout(function(){window.__goBusy=0},20000);
 var HINT=false;try{HINT=localStorage.getItem('ek_in')==='1'}catch(e){}
 function splash(){ov.innerHTML='<div class="lg-w" style="text-align:center;color:#fff"><img src="'+window.EK_LOGO+'" alt="" style="width:96px;height:96px;border-radius:24px;box-shadow:0 8px 28px rgba(0,0,0,.4)"><div style="font-size:25px;font-weight:700;margin-top:14px">একতাই আমাদের শক্তি</div><div style="opacity:.8;font-size:15px;margin-top:10px">⏳ লোড হচ্ছে…</div></div>'}
@@ -602,7 +624,7 @@ if(HINT){splash();setTimeout(function(){if(!auth.currentUser&&ov.style.display!=
 var role={owner:false,edit:false,cashier:false,leader:false};
 function backfill(){var K=['nameEn','father','mother','dob','blood','addr','paddr','nid','nomName','nomFather','nomRel','nomPhone','nomAddr','nomNid','photo','nomPhoto','issue','nomDob','nomBlood','nomIssue'];
 try{fs.collection('profiles').where('status','==','approved').get().then(function(qs){qs.forEach(function(d){var p=d.data();if(!p||!p.kyc||!p.memberId)return;var r=fs.doc('members/'+p.memberId);r.get().then(function(s){if(!s.exists)return;var m=s.data(),up={};K.forEach(function(k){if(!m[k]&&p[k])up[k]=p[k]});if(Object.keys(up).length)r.set(up,{merge:true}).catch(function(){})}).catch(function(){})})}).catch(function(){})}catch(e){}}
-var ready=new Promise(function(res){auth.onAuthStateChanged(async function(u){if(!u){try{localStorage.removeItem('ek_in')}catch(e){}window.__fastDone=0;if(HINT){HINT=false;draw()}ov.style.display='flex';window.__prex&&window.__prex();return}try{localStorage.setItem('ek_in','1')}catch(e){}if(window.__regP){try{await window.__regP}catch(e){}window.__regP=null;u=auth.currentUser||u}
+var ready=new Promise(function(res){auth.onAuthStateChanged(async function(u){if(!u){if(window.__gPend)return;try{localStorage.removeItem('ek_in')}catch(e){}window.__fastDone=0;if(HINT){HINT=false;draw()}ov.style.display='flex';window.__prex&&window.__prex();return}try{localStorage.setItem('ek_in','1')}catch(e){}if(window.__regP){try{await window.__regP}catch(e){}window.__regP=null;u=auth.currentUser||u}
  var em=u.email,fail=false,RK='ek_role_'+u.uid,rc=null,entered=false;
  try{rc=JSON.parse(localStorage.getItem(RK)||'null')}catch(e){}
  function enter(){if(entered)return;entered=true;window.__prex&&window.__prex();if(!role.owner&&!role.edit){wait(u);return}ov.style.display='none';window.__me=u;if(role.owner||role.cashier)panel();if(role.owner)backfill();res()}
