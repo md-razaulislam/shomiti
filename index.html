@@ -2068,7 +2068,7 @@ function idcTheme(css){var t=IDC_TH[THS.idc]||IDC_TH[0];return css.replace(/#0b5
 var COL={};
 function colH(h){var parts=h.split(/(?=<div style="font-weight:700;margin:1[26]px 0 6px">)/);if(parts.length<2)return h;var out=parts[0],tail='';
  parts.slice(1).forEach(function(p,i){var e=p.indexOf('</div>')+6,ttl=p.slice(0,e),body=p.slice(e),last=i===parts.length-2;if(last){body=body.replace(/<\/div>$/,'');tail='</div>'}
-  var open=COL['t'+i]!==false;
+  var open=COL['t'+i]===true;
   out+=ttl+'<div style="display:flex;justify-content:center;margin:-2px 0 8px"><button type="button" data-act="col" data-k="t'+i+'" aria-expanded="'+open+'" aria-label="খুলুন বা বন্ধ করুন" style="width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface);box-shadow:0 2px 8px rgba(0,0,0,.12);color:var(--ink);font-size:16px;cursor:pointer;transition:transform .25s;transform:rotate('+(open?'180':'0')+'deg)">⌄</button></div><div style="display:'+(open?'block':'none')+'">'+body+'</div>'});
  return out+tail}
 function themeCard(){var sw=function(bg,sel,act,i,name){return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:68px"><button type="button" data-act="'+act+'" data-i="'+i+'" aria-label="'+esc(name)+'" aria-pressed="'+(sel?'true':'false')+'" style="width:46px;height:46px;border-radius:50%;cursor:pointer;padding:0;border:3px solid '+(sel?'var(--ink)':'var(--line)')+';background:'+bg+';box-shadow:'+(sel?'0 0 0 2px var(--surface),0 0 0 4px var(--accent)':'none')+';color:#fff;font-size:18px;font-weight:700">'+(sel?'✓':'')+'</button><span style="font-size:.74rem;text-align:center;line-height:1.2;color:var(--muted)">'+esc(name)+'</span></div>'};
@@ -2753,7 +2753,7 @@ document.addEventListener('click',function(e){
   else if(a==='export-txns')exportTxns();
   else if(a==='export-members')exportMembers();
   else if(a==='export-months')exportMonths();
-  else if(a==='col'){COL[b.dataset.k]=COL[b.dataset.k]===false;render()}
+  else if(a==='col'){COL[b.dataset.k]=COL[b.dataset.k]!==true;render()}
   else if(a==='loan-payall'){if(S.canWrite)payAll(b.dataset.id)}
   else if(a==='th-rep'){THS.rep=+b.dataset.i;THS.rb=-1;thSave();render()}
   else if(a==='th-rb'){THS.rb=+b.dataset.i;thSave();render();toast('রংধনু রিপোর্ট স্টাইল বেছে নেওয়া হয়েছে')}
